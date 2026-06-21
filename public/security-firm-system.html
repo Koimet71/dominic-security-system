@@ -1,230 +1,59 @@
-{\rtf1\ansi\ansicpg1252\cocoartf2869
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
-{\colortbl;\red255\green255\blue255;}
-{\*\expandedcolortbl;;}
-\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+const root = document.documentElement;
+let dark = matchMedia('(prefers-color-scheme: dark)').matches;
+const byId = id => document.getElementById(id);
+const setTheme = () => root.setAttribute('data-theme', dark ? 'dark' : 'light');
+setTheme();
+byId('themeToggle').onclick = () => { dark = !dark; setTheme(); };
 
-\f0\fs24 \cf0 <!DOCTYPE html>\
-<html lang="en" data-theme="light">\
-<head>\
-  <meta charset="UTF-8">\
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">\
-  <title>Dominic Security System</title>\
-  <link rel="preconnect" href="https://api.fontshare.com">\
-  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&f[]=cabinet-grotesk@500,700&display=swap" rel="stylesheet">\
-  <style>\
-    :root,[data-theme="light"]\{--bg:#f4f8f3;--surface:#fbfdfb;--surface2:#eef5ed;--border:#ccdcca;--text:#162214;--muted:#5c6e59;--primary:#1d6b34;--primaryHover:#155126;--highlight:#d7ead8;--success:#2d8a46;--warning:#8a661f;--error:#a13145;--radius:18px;--radiusSm:12px;--shadow:0 12px 30px rgba(22,34,20,.08)\}\
-    [data-theme="dark"]\{--bg:#111611;--surface:#171d17;--surface2:#1d251d;--border:#324032;--text:#edf3eb;--muted:#a8b4a5;--primary:#6fc588;--primaryHover:#59ad72;--highlight:#203126\}\
-    *\{box-sizing:border-box\}body\{margin:0;font:16px/1.6 'Satoshi',sans-serif;background:linear-gradient(180deg,var(--bg),var(--surface2));color:var(--text)\}button,input,select\{font:inherit\}\
-    .shell\{max-width:1280px;margin:0 auto;padding:16px\}.panel\{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow)\}\
-    .topbar,.hero,.two,.metrics,.toolbar\{display:grid;gap:16px\}.topbar\{grid-template-columns:1fr auto;align-items:center;padding:8px 0 24px\}.hero,.two\{grid-template-columns:1.1fr .9fr\}.metrics\{grid-template-columns:repeat(6,minmax(0,1fr))\}.toolbar\{grid-template-columns:1fr auto;align-items:center;margin:24px 0 16px\}\
-    .brand\{display:flex;gap:12px;align-items:center\}.logo\{width:48px;height:48px;border-radius:14px;background:var(--primary);display:grid;place-items:center;color:#fff\}.logo svg\{width:24px;height:24px\}.heroCopy,.login,.card\{padding:24px\}\
-    .eyebrow\{display:inline-block;padding:6px 12px;border-radius:999px;background:var(--highlight);color:var(--primary);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em\}h1,h2,h3,h4\{font-family:'Cabinet Grotesk',sans-serif;margin:0 0 8px\}.hero h2\{font-size:clamp(2rem,5vw,3.4rem);line-height:1.05;max-width:12ch;margin-top:16px\}.muted\{color:var(--muted)\}\
-    .mini,.metric\{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radiusSm);padding:16px\}.metric strong\{display:block;font-size:28px\}.btn,.tab\{border:1px solid var(--border);background:var(--surface);color:var(--text);padding:12px 16px;border-radius:999px;cursor:pointer\}.btn.primary,.tab.active\{background:var(--primary);border-color:var(--primary);color:#fff\}.btn.small\{padding:8px 12px\}\
-    .field\{display:grid;gap:8px;margin-bottom:14px\}input,select\{width:100%;padding:14px;border-radius:12px;border:1px solid var(--border);background:var(--surface2);color:var(--text)\}.app\{display:none;margin-top:24px\}.app.active\{display:block\}.tabs,.actions\{display:flex;gap:12px;flex-wrap:wrap\}.view\{display:none\}.view.active\{display:grid;gap:24px\}.cards,.list,.paygrid\{display:grid;gap:12px\}.cards,.paygrid\{grid-template-columns:repeat(2,minmax(0,1fr))\}\
-    .item\{display:flex;justify-content:space-between;gap:12px;background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:14px\}.badge\{padding:6px 10px;border-radius:999px;font-size:12px;font-weight:700\}.ok\{background:rgba(45,138,70,.14);color:var(--success)\}.pending\{background:rgba(138,102,31,.14);color:var(--warning)\}.error\{background:rgba(161,49,69,.14);color:var(--error)\}\
-    table\{width:100%;border-collapse:collapse\}th,td\{text-align:left;padding:12px;border-bottom:1px solid var(--border)\}th\{color:var(--muted)\}.table\{overflow:auto\}.danger\{background:transparent;border-color:var(--error);color:var(--error)\}\
-    @media (max-width:980px)\{.hero,.two,.topbar,.toolbar,.metrics\{grid-template-columns:1fr\}.cards,.paygrid\{grid-template-columns:1fr\}\}\
-  </style>\
-</head>\
-<body>\
-  <div class="shell">\
-    <header class="topbar">\
-      <div class="brand">\
-        <div class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-2.7 8.1-7 10-4.3-1.9-7-5.5-7-10V6l7-3z"></path><path d="M9.5 12l1.8 1.8 3.6-4"></path></svg></div>\
-        <div><h1>Dominic Security System</h1><div class="muted">Authenticated admin system with attendance, cards, salaries, and edit tools</div></div>\
-      </div>\
-      <button class="btn" id="themeToggle">Toggle theme</button>\
-    </header>\
-\
-    <section class="hero">\
-      <article class="panel heroCopy">\
-        <span class="eyebrow">Security operations suite</span>\
-        <h2>Manage recruits, assignments, salary records, cards, attendance, and payments.</h2>\
-        <p class="muted">This version adds edit actions and attendance tracking for a more practical internal workflow.</p>\
-        <div class="metrics">\
-          <div class="metric"><strong id="mRecruits">-</strong><span class="muted">Recruits</span></div>\
-          <div class="metric"><strong id="mAssignments">-</strong><span class="muted">Assignments</span></div>\
-          <div class="metric"><strong id="mPayments">-</strong><span class="muted">Payments</span></div>\
-          <div class="metric"><strong id="mCards">-</strong><span class="muted">Cards pending</span></div>\
-          <div class="metric"><strong id="mSalary">-</strong><span class="muted">Salary pending</span></div>\
-          <div class="metric"><strong id="mAttendance">-</strong><span class="muted">Present today</span></div>\
-        </div>\
-      </article>\
-      <aside class="panel login">\
-        <h3>Admin login</h3>\
-        <p class="muted">Default account: admin@dominicsecurity.com / admin123</p>\
-        <div class="field"><label>Email</label><input id="email" type="email" value="admin@dominicsecurity.com"></div>\
-        <div class="field"><label>Password</label><input id="password" type="password" value="admin123"></div>\
-        <button class="btn primary" id="loginBtn">Login</button>\
-        <p class="muted" id="loginState">Waiting for login.</p>\
-      </aside>\
-    </section>\
-\
-    <section class="app" id="appShell">\
-      <div class="toolbar">\
-        <div><h3>Control center</h3><p class="muted" style="margin:0">Use the tabs below to manage security company operations.</p></div>\
-        <div class="tabs">\
-          <button class="tab active" data-tab="dashboard">Dashboard</button>\
-          <button class="tab" data-tab="recruitment">Recruitment</button>\
-          <button class="tab" data-tab="assignments">Assignments</button>\
-          <button class="tab" data-tab="salaries">Salaries</button>\
-          <button class="tab" data-tab="cards">Cards</button>\
-          <button class="tab" data-tab="attendance">Attendance</button>\
-          <button class="tab" data-tab="payments">Payments</button>\
-        </div>\
-      </div>\
-\
-      <section class="view active" id="dashboard">\
-        <div class="two">\
-          <div class="panel card">\
-            <h3>Module overview</h3>\
-            <div class="cards">\
-              <div class="mini"><h4>Recruitment</h4><p class="muted">Create and track guard applications.</p></div>\
-              <div class="mini"><h4>Assignments</h4><p class="muted">Monitor site deployments and shifts.</p></div>\
-              <div class="mini"><h4>Salaries</h4><p class="muted">Store gross, deductions, net, and approval status.</p></div>\
-              <div class="mini"><h4>Attendance</h4><p class="muted">Track daily presence, shift, and site attendance.</p></div>\
-            </div>\
-          </div>\
-          <div class="panel card">\
-            <h3>Payment procedures</h3>\
-            <div class="paygrid">\
-              <div class="mini"><h4>M-Pesa</h4><p class="muted">Approve payroll, send funds, keep transaction reference, and close payout.</p></div>\
-              <div class="mini"><h4>Bank</h4><p class="muted">Verify account, upload transfer batch, confirm banking status, and archive proof.</p></div>\
-            </div>\
-          </div>\
-        </div>\
-      </section>\
-\
-      <section class="view" id="recruitment">\
-        <div class="two">\
-          <div class="panel card">\
-            <h3>Add recruit</h3>\
-            <form id="recruitForm">\
-              <div class="field"><label>Full name</label><input id="rname" required></div>\
-              <div class="field"><label>Phone</label><input id="rphone"></div>\
-              <div class="field"><label>Preferred site</label><input id="rsite"></div>\
-              <div class="field"><label>Stage</label><select id="rstage"><option>Screening</option><option>Interview</option><option>Approved</option></select></div>\
-              <button class="btn primary" type="submit">Save recruit</button>\
-            </form>\
-          </div>\
-          <div class="panel card"><h3>Applicants</h3><div class="list" id="recruitList"></div></div>\
-        </div>\
-      </section>\
-\
-      <section class="view" id="assignments">\
-        <div class="panel card"><h3>Assignment records</h3><div class="table"><table><thead><tr><th>Officer</th><th>Site</th><th>Shift</th><th>Card status</th><th>Salary</th></tr></thead><tbody id="assignmentTable"></tbody></table></div></div>\
-      </section>\
-\
-      <section class="view" id="salaries">\
-        <div class="two">\
-          <div class="panel card">\
-            <h3 id="salaryFormTitle">Add salary record</h3>\
-            <form id="salaryForm">\
-              <input type="hidden" id="salaryId">\
-              <div class="field"><label>Officer</label><input id="sofficer" required></div>\
-              <div class="field"><label>Month</label><input id="smonth" type="month" required></div>\
-              <div class="field"><label>Gross</label><input id="sgross" placeholder="KES 30,000" required></div>\
-              <div class="field"><label>Deductions</label><input id="sdeduct" placeholder="KES 2,000"></div>\
-              <div class="field"><label>Net</label><input id="snet" placeholder="KES 28,000" required></div>\
-              <div class="field"><label>Status</label><select id="sstatus"><option>Pending</option><option>Approved</option></select></div>\
-              <div class="actions"><button class="btn primary" type="submit">Save salary</button><button class="btn" type="button" onclick="resetSalaryForm()">Clear</button></div>\
-            </form>\
-          </div>\
-          <div class="panel card"><h3>Salary records</h3><div class="list" id="salaryList"></div></div>\
-        </div>\
-      </section>\
-\
-      <section class="view" id="cards">\
-        <div class="two">\
-          <div class="panel card">\
-            <h3 id="cardFormTitle">Add card record</h3>\
-            <form id="cardForm">\
-              <input type="hidden" id="cardId">\
-              <div class="field"><label>Officer</label><input id="cofficer" required></div>\
-              <div class="field"><label>Card number</label><input id="ccard" required></div>\
-              <div class="field"><label>Issued date</label><input id="cissued" type="date" required></div>\
-              <div class="field"><label>Expiry date</label><input id="cexpiry" type="date" required></div>\
-              <div class="field"><label>Status</label><select id="cstatus"><option>Active</option><option>Renewal due</option><option>Lost</option></select></div>\
-              <div class="actions"><button class="btn primary" type="submit">Save card</button><button class="btn" type="button" onclick="resetCardForm()">Clear</button></div>\
-            </form>\
-          </div>\
-          <div class="panel card"><h3>Card records</h3><div class="list" id="cardList"></div></div>\
-        </div>\
-      </section>\
-\
-      <section class="view" id="attendance">\
-        <div class="two">\
-          <div class="panel card">\
-            <h3 id="attendanceFormTitle">Add attendance record</h3>\
-            <form id="attendanceForm">\
-              <input type="hidden" id="attendanceId">\
-              <div class="field"><label>Officer</label><input id="aofficer" required></div>\
-              <div class="field"><label>Site</label><input id="asite" required></div>\
-              <div class="field"><label>Date</label><input id="adate" type="date" required></div>\
-              <div class="field"><label>Shift</label><select id="ashift"><option>Day</option><option>Night</option></select></div>\
-              <div class="field"><label>Status</label><select id="astatus"><option>Present</option><option>Off</option><option>Absent</option></select></div>\
-              <div class="actions"><button class="btn primary" type="submit">Save attendance</button><button class="btn" type="button" onclick="resetAttendanceForm()">Clear</button></div>\
-            </form>\
-          </div>\
-          <div class="panel card"><h3>Attendance records</h3><div class="list" id="attendanceList"></div></div>\
-        </div>\
-      </section>\
-\
-      <section class="view" id="payments">\
-        <div class="panel card"><h3>Payroll sample</h3><div class="table"><table><thead><tr><th>Officer</th><th>Method</th><th>Amount</th><th>Status</th></tr></thead><tbody id="paymentTable"></tbody></table></div></div>\
-      </section>\
-    </section>\
-  </div>\
-\
-  <script>\
-    let token = '';\
-    let salaryRows = [];\
-    let cardRows = [];\
-    let attendanceRows = [];\
-    const root = document.documentElement;\
-    let dark = matchMedia('(prefers-color-scheme: dark)').matches;\
-    const byId = id => document.getElementById(id);\
-    const setTheme = () => root.setAttribute('data-theme', dark ? 'dark' : 'light');\
-    setTheme();\
-    byId('themeToggle').onclick = () => \{ dark = !dark; setTheme(); \};\
-    const authHeaders = () => (\{ 'Content-Type': 'application/json', Authorization: `Bearer $\{token\}` \});\
-\
-    document.querySelectorAll('.tab').forEach(tab => tab.addEventListener('click', () => \{\
-      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));\
-      document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));\
-      tab.classList.add('active');\
-      byId(tab.dataset.tab).classList.add('active');\
-    \}));\
-\
-    async function api(url, options = \{\}) \{\
-      const res = await fetch(url, options);\
-      const data = await res.json();\
-      if (!res.ok) throw new Error(data.message || 'Request failed');\
-      return data;\
-    \}\
-\
-    async function loadDashboard() \{\
-      const d = await api('/api/dashboard', \{ headers: authHeaders() \});\
-      byId('mRecruits').textContent = d.recruits;\
-      byId('mAssignments').textContent = d.assignments;\
-      byId('mPayments').textContent = d.payments;\
-      byId('mCards').textContent = d.cardsPending;\
-      byId('mSalary').textContent = d.salariesPending;\
-      byId('mAttendance').textContent = d.attendancePresent;\
-    \}\
-    async function loadRecruits() \{\
-      const rows = await api('/api/recruits', \{ headers: authHeaders() \});\
-      byId('recruitList').innerHTML = rows.map(r => `<div class="item"><div><strong>$\{r.name\}</strong><div class="muted">$\{r.stage\}$\{r.site ? `, site: $\{r.site\}` : ''\}$\{r.phone ? `, phone: $\{r.phone\}` : ''\}</div></div><span class="badge $\{r.stage === 'Approved' ? 'ok' : 'pending'\}">$\{r.stage\}</span></div>`).join('');\
-    \}\
-    async function loadAssignments() \{\
-      const rows = await api('/api/assignments', \{ headers: authHeaders() \});\
-      byId('assignmentTable').innerHTML = rows.map(r => `<tr><td>$\{r.officer\}</td><td>$\{r.site\}</td><td>$\{r.shift\}</td><td>$\{r.card_status\}</td><td>$\{r.salary\}</td></tr>`).join('');\
-    \}\
-    async function loadPayments() \{\
-      const rows = await api('/api/payments', \{ headers: authHeaders() \});\
-      byId('paymentTable').innerHTML = rows.map(r => `<tr><td>$\{r.officer\}</td><td>$\{r.method\}</td><td>$\{r.amount\}</td><td>$\{r.status\}</td></tr>`).join('');\
-    \}\
-    async function loadSalaries() \{\
-      salaryRows = await api('/api/s}
+let token = '';
+const authHeaders = () => ({ 'Content-Type': 'application/json', Authorization: `Bearer ${token}` });
+
+// tabs logic stays as you had it…
+
+async function api(url, options = {}) {
+  const res = await fetch(url, options);
+  const data = await res.json();
+  if (!res.ok || data.success === false) {
+    throw new Error(data.message || 'Request failed');
+  }
+  return data;
+}
+
+// your existing loaders (loadDashboard, loadRecruits, etc.) stay the same
+
+async function boot() {
+  await Promise.all([
+    loadDashboard(),
+    loadRecruits(),
+    loadAssignments(),
+    loadPayments(),
+    loadSalaries(),
+    loadCards(),
+    loadAttendance()
+  ]);
+}
+
+const loginBtn = byId('loginBtn');
+const loginState = byId('loginState');
+const appShell = byId('appShell');
+
+loginBtn.onclick = async () => {
+  try {
+    loginState.textContent = 'Logging in…';
+    const data = await api('/api/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: byId('email').value.trim(),
+        password: byId('password').value.trim()
+      })
+    });
+
+    token = data.token;
+    loginState.textContent = `Logged in as ${data.user.name} (${data.user.role}).`;
+    appShell.classList.add('active');
+    await boot();
+  } catch (err) {
+    loginState.textContent = err.message;
+  }
+};
